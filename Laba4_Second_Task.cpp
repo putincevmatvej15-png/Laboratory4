@@ -4,14 +4,11 @@
 #include <algorithm>
 #include <map>
 #include <string>
+#include <cstdint>  
 
 using namespace std;
-
-// создадим генератор, для использования одинаковых последовательностей
 random_device rd;
-ranlux48 gen(rd());
-
-// задание 1,2,3 связаны общим массивом
+ranlux48 gen(rd);
 vector<int> task1_2_3(int n) {
     uniform_int_distribution<int> dist1(-100, 100);
     vector<int> arr(n);
@@ -21,9 +18,8 @@ vector<int> task1_2_3(int n) {
         cout << arr[i] << " ";
     }
     cout << endl;
-
     int max_idx = 0;
-    long long prod_neg = 1;
+    int64_t prod_neg = 1;   
     bool has_neg = false;
 
     for (int i = 0; i < n; ++i) {
@@ -54,7 +50,6 @@ vector<int> task1_2_3(int n) {
     return arr;
 }
 
-// задание 4
 void task4() {
     string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     uniform_int_distribution<int> dist(0, alphabet.length() - 1);
@@ -71,7 +66,6 @@ void task4() {
     cout << "Строка с измененным регистром: " << s << endl;
 }
 
-// задание 5
 void task5(int n) {
     if (n < 30) n = 30;
     uniform_int_distribution<int> dist2(-20, 20);
@@ -87,9 +81,7 @@ void task5(int n) {
     for (auto const& [num, count] : counts) {
         if (count > counts[most_frequent]) most_frequent = num;
     }
-
     sort(arr.begin(), arr.end());
-
     cout << "\nСамое частое число: " << most_frequent
          << " (встречается " << counts[most_frequent] << " раз)" << endl;
     cout << "Отсортированный массив: ";
@@ -98,20 +90,20 @@ void task5(int n) {
 }
 
 int main() {
-    setlocale(LC_ALL, "Russian"); 
+    setlocale(LC_ALL, "Russian");
 
     int n;
-    cout << "Введите размер массива n:";
+    cout << "Введите размер массива n: ";
     cin >> n;
     if (n < 10) {
         cout << "n должно быть не меньше 10." << endl;
         return 1;
     }
-    cout << "\n выполнение заданий 1, 2, 3" << endl;
+    cout << "\n--- Выполнение заданий 1, 2, 3 ---" << endl;
     task1_2_3(n);
-    cout << "\n выполнение задания 4 " << endl;
+    cout << "\n--- Выполнение задания 4 ---" << endl;
     task4();
-    cout << "\n выполнение задания 5 " << endl;
+    cout << "\n--- Выполнение задания 5 ---" << endl;
     task5(n);
     return 0;
 }
